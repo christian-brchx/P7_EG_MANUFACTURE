@@ -1,0 +1,10 @@
+<template>
+    <!-- Bouton neutre  -->
+    <div if:false={clicked}>
+      <lightning-button class="slds-m-left_x-small" label="Update Lead Status" onclick={onClick}></lightning-button>
+    </div>
+    <!-- Bouton succès  -->
+    <div if:true={clicked}>
+      <lightning-button variant="success" class="slds-m-left_x-small" label="Update Lead Status" onclick={onClick}></lightning-button>
+    </div>
+</template>
