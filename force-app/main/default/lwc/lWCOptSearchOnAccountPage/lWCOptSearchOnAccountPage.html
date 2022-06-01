@@ -1,0 +1,43 @@
+<template>
+    <div class="slds-var-m-top_medium slds-var-m-bottom_medium">
+      <h2 class="slds-text-heading_medium slds-m-bottom_xxx-small">
+        Search for Opportunities by Keyword
+      </h2>  
+      <div class="slds-p-around_small lgc-bg">
+        <lightning-input type="text" 
+          label="Keyword" 
+          value={keyword}
+          required
+          onchange={handleInputChange}>
+        </lightning-input>
+      </div>
+      <div if:false={clicked}>
+        <lightning-button class="slds-m-left_x-small" label="Search" onclick={search}></lightning-button>
+      </div>
+      <!-- Bouton succès  -->
+      <div if:true={clicked}>
+        <lightning-button variant="success" class="slds-m-left_x-small" label="Search"></lightning-button>
+      </div>
+    </div>
+    <div if:false={listEmpty} class="slds-card">
+      <h2 class="slds-text-heading_medium">Opportunities</h2>
+      <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-size_1-of-3" for:each={opportunities} for:item='opt' key={opt.Id}>
+            <lightning-record-view-form record-id={opt.Id} object-api-name="Opportunity">
+              <!-- Build a box with an id equal to the Opportunity Id -->
+              <div id={opt.Id} class="slds-box box-transition slds-text-align_center slds-m-around_x-small" onclick={blockClicked}>
+                  <lightning-icon icon-name="standard:opportunity" alternative-text="Opportunity" title="Opportunity"></lightning-icon>
+                  <lightning-output-field field-name="Name"></lightning-output-field>
+                  <lightning-output-field field-name="StageName"></lightning-output-field>
+                  <lightning-output-field field-name="Amount"></lightning-output-field>
+                  <lightning-output-field field-name="CloseDate"></lightning-output-field>
+              </div>                  
+            </lightning-record-view-form>
+          </div>
+      </div>
+    </div>
+    <div if:true={listEmpty} class="slds-card">
+      <h2 class="slds-text-heading_medium">No opportunity found</h2>
+    </div>
+
+</template>

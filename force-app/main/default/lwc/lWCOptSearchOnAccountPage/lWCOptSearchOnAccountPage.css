@@ -1,0 +1,9 @@
+.box-transition {
+    transition: transform 400ms;
+}
+
+.box-transition:hover{
+    transform: scale(1.05);
+    cursor:pointer;
+    background-color:rgb(167, 187, 248);
+}
