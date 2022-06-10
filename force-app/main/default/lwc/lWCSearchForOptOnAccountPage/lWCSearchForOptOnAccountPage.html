@@ -1,23 +1,22 @@
 <template>
     <div class="slds-m-top_medium slds-m-bottom_x-large">
-        <p class="slds-text-heading_small slds-m-bottom_small">
-          Search for Opportunities by Keyword.
-        </p>  
-        <div class="slds-p-around_small lgc-bg">
-          <lightning-input type="text" 
-            label="Keyword" 
-            value={keyword} 
-            required
-            onchange={handleInputChange}>
-          </lightning-input>
-        </div>
-        <div if:false={clicked}>
-            <lightning-button class="slds-m-left_x-small" label="Search" onclick={search}></lightning-button>
-        </div>
-        <!-- Bouton succès  -->
-        <div if:true={clicked}>
-        <lightning-button variant="success" class="slds-m-left_x-small" label="Search"></lightning-button>
-        </div>
+      <h2 class="slds-text-heading_medium slds-m-bottom_xxx-small">
+        Search for Opportunities by Keyword
+      </h2>  
+      <lightning-input type="text" 
+        label="Keyword" 
+        value={keyword} 
+        required
+        variant="label-inline"
+        onchange={handleInputChange}>
+      </lightning-input>
+      <div if:false={clicked}>
+          <lightning-button class="slds-m-left_x-small" label="Search" onclick={search}></lightning-button>
+      </div>
+      <!-- Bouton succès  -->
+      <div if:true={clicked}>
+      <lightning-button variant="success" class="slds-m-left_x-small" label="Search"></lightning-button>
+      </div>
     </div>
     <div if:false={listEmpty} style="height: 200px;">
         <lightning-datatable 
@@ -28,5 +27,8 @@
               onrowaction={getSelectedName}
         >
         </lightning-datatable>
-    </div>    
+    </div> 
+    <div if:true={listEmpty} class="slds-card">
+      <h2 class="slds-text-heading_medium">No opportunity found</h2>
+    </div>
 </template>

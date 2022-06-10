@@ -3,14 +3,13 @@
       <h2 class="slds-text-heading_medium slds-m-bottom_xxx-small">
         Search for Opportunities by Keyword
       </h2>  
-      <div class="slds-p-around_small lgc-bg">
-        <lightning-input type="text" 
-          label="Keyword" 
-          value={keyword}
-          required
-          onchange={handleInputChange}>
-        </lightning-input>
-      </div>
+      <lightning-input type="text" 
+        label="Keyword" 
+        value={keyword}
+        required
+        variant="label-inline"
+        onchange={handleInputChange}>
+      </lightning-input>
       <div if:false={clicked}>
         <lightning-button class="slds-m-left_x-small" label="Search" onclick={search}></lightning-button>
       </div>
