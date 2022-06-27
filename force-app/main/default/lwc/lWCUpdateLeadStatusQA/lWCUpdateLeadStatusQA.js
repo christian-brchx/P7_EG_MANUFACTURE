@@ -7,6 +7,7 @@ import ID_FIELD from '@salesforce/schema/Lead.Id';
 
 
 export default class LWCUpdateLeadStatusQA extends LightningElement {
+    isExecuting = false;
     @api recordId;
 
     @wire(getRecord, { recordId: '$recordId', fields: [ STATUS_FIELD ] })
@@ -21,30 +22,42 @@ export default class LWCUpdateLeadStatusQA extends LightningElement {
 
     @api invoke() {
         console.log("Entrée dans Invoke");
+        
+        if (this.isExecuting) {
+            console.log("Invoke is already executing then return without action");
+            return;
+        }
 
-        const fields = {};
-        fields[ID_FIELD.fieldApiName] = this.recordId;
-        fields[STATUS_FIELD.fieldApiName] = "Intéressé(e)";
-        const recordInput = { fields };
-        updateRecord(recordInput)
-            .then(() => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Success',
-                        message: 'Lead Status updated',
-                        variant: 'success'
-                    })
-                );
-            })
-            .catch(error => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Error updating record',
-                        message: error.body.message,
-                        variant: 'error'
-                    })
-                );
-            });
+        this.isExecuting = true;
+        if (this.recordId) {
+            const fields = {};
+            fields[ID_FIELD.fieldApiName] = this.recordId;
+            fields[STATUS_FIELD.fieldApiName] = "Intéressé(e)";
+            const recordInput = { fields };
+            updateRecord(recordInput)
+                .then(() => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: 'Success',
+                            message: 'Statut modifié avec succès',
+                            variant: 'success'
+                        })
+                    );
+                    this.isExecuting = false;
+                })
+                .catch(error => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: 'Erreur lors de la mise à jour du statut',
+                            message: error.body.message,
+                            variant: 'error'
+                        })
+                    );
+                    this.isExecuting = false;
+                });
+        } else {
+            this.isExecuting = false;
+        }
 
     }
 

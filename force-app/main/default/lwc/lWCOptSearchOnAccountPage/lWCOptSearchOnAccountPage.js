@@ -86,6 +86,7 @@ export default class lWCOptSearchOnAccountPage extends NavigationMixin(Lightning
 
         console.log("id = ",this.idOpportunity);
 
+        /*
         this[NavigationMixin.GenerateUrl]({
             type: 'standard__recordPage',
             attributes: {
@@ -95,5 +96,23 @@ export default class lWCOptSearchOnAccountPage extends NavigationMixin(Lightning
         }).then((url) => {
             window.open(url,"_self");
         });
+        */
+
+        this[NavigationMixin.Navigate](
+            {
+                type: 'standard__app',
+                attributes: {
+                    appTarget: 'standard__LightningSales',
+                    pageRef: {
+                        type: 'standard__recordPage',
+                        attributes: {
+                            recordId: this.idOpportunity,
+                            objectApiName: 'Opportunity',
+                            actionName: 'view'
+                        }
+                    }
+                }
+            }
+        );
     }
 }

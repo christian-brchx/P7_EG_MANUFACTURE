@@ -13,9 +13,9 @@
       <div if:false={clicked}>
         <lightning-button class="slds-m-left_x-small" label="Search" onclick={search}></lightning-button>
       </div>
-      <!-- Bouton succès  -->
+      <!-- Button activated  -->
       <div if:true={clicked}>
-        <lightning-button variant="success" class="slds-m-left_x-small" label="Search"></lightning-button>
+        <lightning-button variant="brand" class="slds-m-left_x-small" label="Search"></lightning-button>
       </div>
     </div>
     <div if:false={listEmpty} class="slds-card">
