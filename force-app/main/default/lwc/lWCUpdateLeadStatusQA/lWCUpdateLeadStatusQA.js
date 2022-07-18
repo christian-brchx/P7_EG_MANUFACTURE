@@ -13,7 +13,7 @@ export default class LWCUpdateLeadStatusQA extends LightningElement {
     @wire(getRecord, { recordId: '$recordId', fields: [ STATUS_FIELD ] })
     wiredRecord({ error, data }) {
         if (data) {
-            //console.log("LWCUpdateLeadStatusQA wiredRecord data, STATUS_FIELD",getFieldValue(data, STATUS_FIELD));
+            console.log("LWCUpdateLeadStatusQA wiredRecord data, STATUS_FIELD",getFieldValue(data, STATUS_FIELD));
         } else if (error) {
             console.log("LWCUpdateLeadStatusQA wiredRecord error");
             // Handle error. Details in error.message.
